@@ -1,0 +1,716 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>知识总结 | Areslucky</title><meta name="author" content="Areslucky"><meta name="copyright" content="Areslucky"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="面试题目1、什么是进程、线程，有什么区别？ 进程是资源分配和调度的基本单位，每个进程都有自己的独立内存空间，包括代码段、数据段、堆和栈等。 ​	每个进程都有一个唯一的进程标识符（PID）。 ​	进程间的内存通常是隔离的，一个进程崩溃不会影响其他进程。 ​	进程间通信（IPC）需要通过操作系统提供的机制实现，例如管道、消息队列、共享内存等。 线程是进程内的一个执行单元，是处理器调度和分派的基本单位，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="知识总结">
+<meta property="og:url" content="http://example.com/2024/08/16/%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="Areslucky">
+<meta property="og:description" content="面试题目1、什么是进程、线程，有什么区别？ 进程是资源分配和调度的基本单位，每个进程都有自己的独立内存空间，包括代码段、数据段、堆和栈等。 ​	每个进程都有一个唯一的进程标识符（PID）。 ​	进程间的内存通常是隔离的，一个进程崩溃不会影响其他进程。 ​	进程间通信（IPC）需要通过操作系统提供的机制实现，例如管道、消息队列、共享内存等。 线程是进程内的一个执行单元，是处理器调度和分派的基本单位，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/blog002.jpg">
+<meta property="article:published_time" content="2024-08-16T01:05:23.911Z">
+<meta property="article:modified_time" content="2024-08-20T09:06:29.465Z">
+<meta property="article:author" content="Areslucky">
+<meta property="article:tag" content="stm32">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/blog002.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2024/08/16/%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: ,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '知识总结',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2024-08-20 17:06:29'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/background.css"><meta name="generator" content="Hexo 7.1.1"><link rel="alternate" href="/atom.xml" title="Areslucky" type="application/atom+xml">
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/lazyload.gif" data-original="/img/avatar.jpg" onerror="onerror=null;src='/img/lazyload.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">9</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 视音</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/./img/blog002.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Areslucky"><span class="site-name">Areslucky</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 视音</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">知识总结</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="fa-fw post-meta-icon fas fa-history"></i><span class="post-meta-label">更新于</span><time datetime="2024-08-20T09:06:29.465Z" title="更新于 2024-08-20 17:06:29">2024-08-20</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">4.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>14分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="知识总结"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="面试题目"><a href="#面试题目" class="headerlink" title="面试题目"></a>面试题目</h2><p><strong>1、什么是进程、线程，有什么区别？</strong></p>
+<p>进程是资源分配和调度的基本单位，每个进程都有自己的独立内存空间，包括代码段、数据段、堆和栈等。</p>
+<p>​	每个进程都有一个唯一的进程标识符（PID）。</p>
+<p>​	进程间的内存通常是隔离的，一个进程崩溃不会影响其他进程。</p>
+<p>​	进程间通信（IPC）需要通过操作系统提供的机制实现，例如管道、消息队列、共享内存等。</p>
+<p>线程是进程内的一个执行单元，是处理器调度和分派的基本单位，一个进程可以包含多个线程，这些线程共享相同的内存空间。</p>
+<p>​	同一进程内的线程共享进程的资源，如内存和文件句柄。</p>
+<p>​	线程间的通信比进程间通信简单得多，可以直接访问同一内存空间的数据。</p>
+<p>​	创建和切换线程的开销较小。</p>
+<p>​	由于共享内存，如果一个线程出现问题，可能会影响到整个进程内的其他线程。</p>
+<p><strong>2、多进程、多线程的优缺点</strong></p>
+<p>进程是资源分配的基本单位，而线程是处理器调度的基本单位。每个进程至少有一个线程，称为主线程，无论是多进程还是多线程，都可以实现程序的并发执行，提高程序的执行效率。</p>
+<p>​	对于多进程，由于每个进程拥有独立的内存空间，这意味着一个进程中的错误不会影响其他进程，进程间的隔离性较好，有助于提高系统的稳定性。并且由于进程间的数据隔离，我们不需要担心数据竞争和同步问题。但同时因为每个进程都需要独立的内存空间，意味着更多的内存消耗，进程创建和销毁进程的开销较大。进程间的上下文切换涉及切换内存空间和其他系统资源，开销较大。同时进程之间的通信需要通过操作系统提供的机制实现，例如管道，消息队列，共享内存等，多进程可以充分利用多核处理器的能力，适合处理计算密集型任务。</p>
+<p>​	对于多线程，同一进程内的所有线程共享内存空间，可以更容易地访问和修改共享数据，这使得线程间通信简单快捷。创建和销毁线程的开销较小。线程间的上下文切换开销较小。由于线程共享内存空间，存在数据竞争和同步问题和多个线程并发访问共享资源可能会导致资源争用问题，需要使用锁或其他同步机制来保护共享数据，这增加了编程复杂性，同时错误的同步机制可能导致死锁，多线程模型非常适合处理I&#x2F;O密集型任务，如网络请求、文件读写等。</p>
+<p><strong>3、多进程、多线程同步（通讯）的方法</strong>  </p>
+<p><em><strong>进程同步</strong></em></p>
+<p><strong>1.管道</strong></p>
+<p>​	<strong>命名管道</strong>：是在文件系统中作为特殊文件存在的管道，允许不相关的进程之间进行通信。使用<code>mkfifo()</code> 系统调用来创建一个命名管道，这个调用需要指定管道的路径，命名管道可以在任何两个进程之间使用，而不仅仅是父子进程。命名管道作为文件系统的一部分存在，直到明确删除它。</p>
+<p>​        <strong>匿名管道</strong>：临时的、只存在于内存中，通常用于相关联的进程之间（如父进程和子进程）进行单向通信。使用<code>pipe()</code> 系统调用来创建一个匿名管道，该函数返回一个文件描述符数组，其中一个描述符用于读取，另一个用于写入。当所有引用该管道的进程都退出时，匿名管道自动关闭。</p>
+<p><strong>2.信号</strong></p>
+<p>​	信号是软件中断，可以用来通知进程发生了特定的事件。它们可以被用来中断进程的执行或者通知进程执行某些操作。</p>
+<p><strong>3.共享内存</strong></p>
+<p>​	多个进程共享一块内存区域。进程可以通过映射这块内存区域来进行数据交换。<br><strong>4.消息队列</strong>**</p>
+<p>​	消息队列是存储消息的链表，位于内核空间，可以被多个进程访问。进程可以通过消息队列发送和接收消息。</p>
+<p><strong>5.信号量</strong></p>
+<p>​	信号量用于控制多个进程对共享资源的访问。它可以用来同步进程间的操作，防止多个进程同时访问同一资源。</p>
+<p><strong>6.Socket</strong></p>
+<p>​	Socket 可以分为流式 (TCP) 和数据报 (UDP) 类型。</p>
+<p><em><strong>线程同步</strong></em></p>
+<p><strong>1.信号量</strong></p>
+<p>​	信号量同样可以用于线程间同步，控制对共享资源的访问，避免竞态条件。</p>
+<p><strong>2.读写锁</strong> </p>
+<p>​	读写锁允许多个线程同时读取共享资源，但在写入时需要独占访问。这种锁可以提高并发读取的效率。</p>
+<p><strong>3.条件变量</strong></p>
+<p>​	条件变量允许线程等待某个条件满足后才继续执行。它通常与互斥锁一起使用，用于协调线程间的活动。</p>
+<p><strong>4.互斥锁</strong></p>
+<p>​	互斥锁是一种简单的锁定机制，确保一次只有一个线程可以访问共享资源。当一个线程获取了互斥锁后，其他试图获取该锁的线程会被阻塞。</p>
+<p><strong>5.自旋锁</strong></p>
+<p>​	当一个线程试图获取一个已经被另一个线程持有的锁时，它会循环等待直到锁可用。自旋锁适用于短时间的锁定操作，以减少上下文切换带来的开销。</p>
+<p><strong>进程线程的状态</strong>  </p>
+<h2 id="GPIO"><a href="#GPIO" class="headerlink" title="GPIO"></a>GPIO</h2><p>stm32工作电压范围：2 V ≤ VDD ≤ 3.6 V</p>
+<p>GPIO识别电压范围：COMS端口：-0.3V ≤ VIL ≤ 1.164V        1.833V ≤ VIH ≤ 3.6V</p>
+<p>GPIO输出电流：单个IO，最大25mA</p>
+<table>
+<thead>
+<tr>
+<th><strong>GPIO****八种模式</strong></th>
+<th><strong>特点及应用</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>输入浮空</strong></td>
+<td>输入用，完全浮空，状态不定</td>
+</tr>
+<tr>
+<td><strong>输入上拉</strong></td>
+<td>输入用，用内部上拉，默认是高电平</td>
+</tr>
+<tr>
+<td><strong>输入下拉</strong></td>
+<td>输入用，用内部下拉，默认是低电平</td>
+</tr>
+<tr>
+<td><strong>模拟功能</strong></td>
+<td>ADC、DAC</td>
+</tr>
+<tr>
+<td><strong>开漏输出</strong></td>
+<td>软件IIC的SDA、SCL等</td>
+</tr>
+<tr>
+<td><strong>推挽输出</strong></td>
+<td>驱动能力强，25mA（max），通用输出</td>
+</tr>
+<tr>
+<td><strong>开漏式复用功能</strong></td>
+<td>片上外设功能（硬件IIC 的SDA、SCL引脚等）</td>
+</tr>
+<tr>
+<td><strong>推挽式复用功能</strong></td>
+<td>片上外设功能（SPI 的SCK、MISO、MOSI引脚等）</td>
+</tr>
+</tbody></table>
+<p><strong>通用</strong>端口的输入或输出是由GPIO外设控制，我们称之为通用</p>
+<p><strong>复用</strong>端口的输入或输出是由其它非GPIO外设控制，我们称之为复用</p>
+<p><strong>施密特触发器</strong>就是一种整形电路，可以将非标准方波，整形成方波</p>
+<p>​	当输入电压高于正向阈值电压，输出为高；</p>
+<p>​        当输入电压低于负向阈值电压，输出为低；</p>
+<p>​	当输入在正负向阈值电压之间，输出不改变</p>
+<h2 id="EXTI"><a href="#EXTI" class="headerlink" title="EXTI"></a>EXTI</h2><p>External(Extended) interrupt&#x2F;event Controller，外部(扩展)中断事件控制器，包含20个产生事件&#x2F;中断请求的边沿检测器，即总共：20条EXTI线（F1）	</p>
+<p>​	中断：要进入NVIC，有相应的中断服务函数，需要CPU处理。</p>
+<p>​	事件：不进入NVIC，仅用于内部硬件自动控制的，如：TIM、DMA、ADC</p>
+<table>
+<thead>
+<tr>
+<th><strong>中断线</strong></th>
+<th><strong>F1</strong></th>
+<th><strong>F4</strong></th>
+<th><strong>F7</strong></th>
+<th><strong>H7</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>EXTI线0<del>15：对应GPIO PIN 0</del>15</td>
+<td>✔</td>
+<td>✔</td>
+<td>✔</td>
+<td>✔</td>
+</tr>
+<tr>
+<td>EXTI线16：PVD输出</td>
+<td>✔</td>
+<td>✔</td>
+<td>✔</td>
+<td>参考H7参考手册（中文版）657页</td>
+</tr>
+<tr>
+<td>EXTI线17：RTC闹钟事件</td>
+<td>✔</td>
+<td>✔</td>
+<td>✔</td>
+<td></td>
+</tr>
+<tr>
+<td>EXTI线18：USB OTG FS唤醒事件</td>
+<td>✔</td>
+<td>✔</td>
+<td>✔</td>
+<td></td>
+</tr>
+<tr>
+<td>EXTI线19：以太网唤醒事件</td>
+<td></td>
+<td>✔</td>
+<td>✔</td>
+<td></td>
+</tr>
+<tr>
+<td>EXTI线20：USB OTG HS唤醒事件</td>
+<td></td>
+<td>✔</td>
+<td>✔</td>
+<td></td>
+</tr>
+<tr>
+<td>EXTI线21：RTC 入侵和时间戳事件</td>
+<td></td>
+<td>✔</td>
+<td>✔</td>
+<td></td>
+</tr>
+<tr>
+<td>EXTI线22：RTC 唤醒事件</td>
+<td></td>
+<td>✔</td>
+<td>✔</td>
+<td></td>
+</tr>
+<tr>
+<td>EXTI线23：LPTIM1 异步事件</td>
+<td></td>
+<td></td>
+<td>✔</td>
+<td></td>
+</tr>
+<tr>
+<td>…</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p><strong>AFIO</strong>:Alternate Function IO，即复用功能IO，主要用于重映射和外部中断映射配置</p>
+<p>​	配置AFIO寄存器之前要使能AFIO时钟，方法如下：__HAL_RCC_AFIO_CLK_ENABLE(); </p>
+<h2 id="串口"><a href="#串口" class="headerlink" title="串口"></a>串口</h2><p>单工通信：数据只能沿一个方向传输</p>
+<p>半双工通信：数据可以沿两个方向传输，但需要分时进行</p>
+<p>全双工通信：数据可以同时进行双向传输</p>
+<p>同步通信：共用同一时钟信号</p>
+<p>异步通信：没有时钟信号，通过在数据信号中加入起始位和停止位等一些同步信号</p>
+<p>比特率 &#x3D; 波特率 * log2 M ，M表示每个码元承载的信息量</p>
+<table>
+<thead>
+<tr>
+<th>通信接口</th>
+<th>接口引脚</th>
+<th>数据同步方式</th>
+<th>数据传输方向</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>UART  (通用异步收发器)</td>
+<td>TXD:发送端  RXD:接收端  GND:公共地</td>
+<td>异步通信</td>
+<td>全双工</td>
+</tr>
+<tr>
+<td>1-wire</td>
+<td>DQ:发送&#x2F;接收端</td>
+<td>异步通信</td>
+<td>半双工</td>
+</tr>
+<tr>
+<td>IIC</td>
+<td>SCL:同步时钟  SDA:数据输入&#x2F;输出端</td>
+<td>同步通信</td>
+<td>半双工</td>
+</tr>
+<tr>
+<td>SPI</td>
+<td>SCK:同步时钟  MISO:主机输入，从机输出  MOSI:主机输出，从机输入  CS:片选信号</td>
+<td>同步通信</td>
+<td>全双工</td>
+</tr>
+</tbody></table>
+<p><img src="/img/lazyload.gif" data-original="/2024/08/16/%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/image-20240816113110728.png" alt="image-20240816113110728"></p>
+<p><strong>IWDG</strong>的本质是能产生系统复位信号的递减计数器，时钟由独立的RC振荡器提供（可在待机和停止模式下运行），看门狗被激活后，当递减计数器计数到0x000时产生复位。</p>
+<h2 id="TIMER"><a href="#TIMER" class="headerlink" title="TIMER"></a>TIMER</h2><table>
+<thead>
+<tr>
+<th>定时器类型</th>
+<th>主要功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>基本定时器</td>
+<td>没有输入输出通道，常用作时基，即定时功能</td>
+</tr>
+<tr>
+<td>通用定时器</td>
+<td>具有多路独立通道，可用于输入捕获&#x2F;输出比较，也可用作时基</td>
+</tr>
+<tr>
+<td>高级定时器</td>
+<td>除具备通用定时器所有功能外，还具备带死区控制的互补信号输出、刹车输入等功能（可用于电机控制、数字电源设计等）</td>
+</tr>
+</tbody></table>
+<p>Tout &#x3D;((ARR+1)∗(PSC+1))&#x2F;Ft</p>
+<p>基本定时器只能递增计数，而通用定时器计数模式有三种</p>
+<p><strong>通用定时器</strong></p>
+<p>​	16位递增、递减、中心对齐计数器（计数值：0~65535）</p>
+<p>​	16位预分频器（分频系数：1~65536）</p>
+<p>​	可用于触发DAC、ADC</p>
+<p>​	在更新事件、触发事件、输入捕获、输出比较时，会产生中断&#x2F;DMA请求</p>
+<p>​	4个独立通道，可用于：输入捕获、输出比较、输出PWM、单脉冲模式</p>
+<p>​	使用外部信号控制定时器且可实现多个定时器互连的同步电路</p>
+<p>​	支持编码器和霍尔传感器电路等</p>
+<p><strong>计数器时钟源</strong></p>
+<p>​	<strong>①</strong>内部时钟(CK_INT)，来自外设总线APB提供的时钟</p>
+<p>​	<strong>②</strong>外部时钟模式1：外部输入引脚(TIx)，来自定时器通道1或者通道2引脚的信号</p>
+<p>​	<strong>③</strong>外部时钟模式2：外部触发输入(ETR)，来自可以复用为TIMx_ETR的IO引脚</p>
+<p>​	<strong>④</strong>内部触发输入(ITRx)，用于与芯片内部其它通用&#x2F;高级定时器级联</p>
+<p><img src="/img/lazyload.gif" data-original="/2024/08/16/%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/image-20240816142509902.png" alt="image-20240816142509902"></p>
+<p><strong>8080</strong>时序：并口总线时序，常用于MCU屏驱动IC的访问，由Intel提出，也叫英特尔总线</p>
+<table>
+<thead>
+<tr>
+<th><strong>信号</strong></th>
+<th><strong>名称</strong></th>
+<th><strong>控制状态</strong></th>
+<th><strong>作用</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>CS</strong></td>
+<td>片选</td>
+<td>低电平</td>
+<td>选中器件，低电平有效，先选中，后操作</td>
+</tr>
+<tr>
+<td><strong>WR</strong></td>
+<td>写</td>
+<td>↑</td>
+<td>写信号，上升沿有效，用于数据&#x2F;命令写入</td>
+</tr>
+<tr>
+<td><strong>RD</strong></td>
+<td>读</td>
+<td>↑</td>
+<td>读信号，上升沿有效，用于数据&#x2F;命令读取</td>
+</tr>
+<tr>
+<td><strong>RS</strong></td>
+<td>数据&#x2F;命令</td>
+<td>0&#x3D;命&#x2F;1&#x3D;数</td>
+<td>表示当前是读写数据还是命令，也叫DC信号</td>
+</tr>
+<tr>
+<td><strong>D[15:0]</strong></td>
+<td>数据线</td>
+<td>无</td>
+<td>双向数据线，可以写入&#x2F;读取驱动IC数据</td>
+</tr>
+</tbody></table>
+<p><strong>FSMC</strong>，Flexible Static Memory Controller，灵活的静态存储控制器。</p>
+<p>​	配置好FSMC，定义一个指向这些地址的指针，通过对指针操作就可以直接修改存储单元的内容，FSMC自动完成读写命令和数据访问操作，不需要程序去实现时序。</p>
+<table>
+<thead>
+<tr>
+<th>FSMC信号</th>
+<th><strong>信号方向</strong></th>
+<th><strong>功能</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>FSMC_NE[x]</strong></td>
+<td>输出</td>
+<td>片选引脚，x&#x3D;1…4，每个对应不同的内存块</td>
+</tr>
+<tr>
+<td><strong>FSMC_CLK</strong></td>
+<td>输出</td>
+<td>时钟（同步突发模式使用）</td>
+</tr>
+<tr>
+<td><strong>FSMC_A[25:0]</strong></td>
+<td>输出</td>
+<td>地址总线</td>
+</tr>
+<tr>
+<td><strong>FSMC_D[15:0]</strong></td>
+<td>输出&#x2F;输入</td>
+<td>双向数据总线</td>
+</tr>
+<tr>
+<td><strong>FSMC_NOE</strong></td>
+<td>输出</td>
+<td>输出使能（“N”表明低电平有效信号）</td>
+</tr>
+<tr>
+<td><strong>FSMC_NWE</strong></td>
+<td>输出</td>
+<td>写使能</td>
+</tr>
+<tr>
+<td><strong>FSMC_NWAIT</strong></td>
+<td>输入</td>
+<td>NOR闪存要求FSMC等待的信号</td>
+</tr>
+<tr>
+<td><strong>FSMC_NADV</strong></td>
+<td>输出</td>
+<td>地址、数据线复用时作锁存信号</td>
+</tr>
+</tbody></table>
+<p><img src="/img/lazyload.gif" data-original="/2024/08/16/%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/image-20240816191937284.png" alt="image-20240816191937284"></p>
+<table>
+<thead>
+<tr>
+<th><strong>LCD****信号</strong></th>
+<th><strong>MCU****引脚</strong></th>
+<th><strong>作用</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>LCD_RST</strong></td>
+<td>RESET</td>
+<td>LCD复位引脚，连接MCU复位脚，一起复位</td>
+</tr>
+<tr>
+<td><strong>LCD_BL</strong></td>
+<td>PB0</td>
+<td>LCD背光引脚，控制LCD背光亮灭，高电平亮</td>
+</tr>
+<tr>
+<td><strong>LCD_CS (FSMC_NE4)</strong></td>
+<td>PG12</td>
+<td>LCD片选，选中LCD，低电平有效</td>
+</tr>
+<tr>
+<td><strong>LCD_WR (FSMC_NWE)</strong></td>
+<td>PD5</td>
+<td>LCD写信号，上升沿有效，用于数据&#x2F;命令写入</td>
+</tr>
+<tr>
+<td><strong>LCD_RD(FSMC_NOE)</strong></td>
+<td>PD4</td>
+<td>LCD读信号，上升沿有效，用于数据&#x2F;命令读取</td>
+</tr>
+<tr>
+<td><strong>LCD_RS(FSMC_A10)</strong></td>
+<td>PG0</td>
+<td>LCD数据&#x2F;命令线，表示当前是读写数据还是命令</td>
+</tr>
+<tr>
+<td><strong>LCD_D0~D15</strong>  <strong>(<strong><strong>FSMC_Dx</strong></strong>)</strong></td>
+<td>D[1:0]àPD[15:14]  D[3:2]àPD[1:0]  D[12:4]àPE[15:7]  D[15:13]àPD[10:8]</td>
+<td>LCD数据线，16位，一次可以写入一个像素</td>
+</tr>
+</tbody></table>
+<p><img src="/img/lazyload.gif" data-original="/2024/08/16/%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/image-20240816200041651.png" alt="image-20240816200041651"></p>
+<h2 id="NAND-FLASH"><a href="#NAND-FLASH" class="headerlink" title="NAND FLASH"></a><strong>NAND FLASH</strong></h2><p>NAND Flash由块(block)组成，每块又由若干页(page)组成。页是数据读写的最小单位，块是擦除的最小单位。</p>
+<p><img src="/img/lazyload.gif" data-original="/2024/08/16/%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/image-20240816201752875.png" alt="image-20240816201752875"></p>
+<p><strong>Read操作</strong></p>
+<p><img src="/img/lazyload.gif" data-original="/2024/08/16/%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/image-20240816201556146.png" alt="image-20240816201556146"></p>
+<p><strong>Write操作</strong></p>
+<p>PROGRAM(编写)</p>
+<p><img src="/img/lazyload.gif" data-original="/2024/08/16/%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/image-20240816201735815.png" alt="image-20240816201735815"></p>
+<p>ECC（Error Correction Code，错误校正码）：ECC 的页大小通常指的是 ECC 可以保护的最大数据量。</p>
+<p><strong>ERASE（擦除）操作</strong></p>
+<p>​	<img src="/img/lazyload.gif" data-original="/2024/08/16/%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/image-20240816202010672.png" alt="image-20240816202010672"></p>
+<h2 id="RTC"><a href="#RTC" class="headerlink" title="RTC"></a>RTC</h2><p>实时时钟(Real Time Clock，RTC)，本质是一个计数器，计数频率常为秒，专门用来记录时间.</p>
+<p>​	普通定时器无法掉电运行！</p>
+<p>​	RTC特性</p>
+<p>​		1,能提供时间（秒钟数）</p>
+<p>​		2,能在MCU掉电后运行</p>
+<p>​		3，低功耗</p>
+<p>​	为了能够配置RTC，必须先解锁备份寄存器。RTC和后备寄存器不会被系统或电源复位源复位；当从待机模式唤醒时，也不会被复位。 后备寄存器可用于保存掉电时的数据。</p>
+<p><img src="/img/lazyload.gif" data-original="/2024/08/16/%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/image-20240817100455176.png" alt="image-20240817100455176"></p>
+<p><img src="/img/lazyload.gif" data-original="/2024/08/16/%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/image-20240817100531548.png" alt="image-20240817100531548"></p>
+<h2 id="低功耗模式"><a href="#低功耗模式" class="headerlink" title="低功耗模式"></a>低功耗模式</h2><p>STM32具有运行、睡眠、停止和待机四种工作模式。上电后默认是在运行模式，当内核不需要继续运行时，可以选择后面三种低功耗模式。</p>
+<p>​	低功耗模式：</p>
+<p>​		 ①，睡眠模式  </p>
+<p>​		 ②，停止模式  </p>
+<p>​		 ③，待机模式</p>
+<table>
+<thead>
+<tr>
+<th><strong>模式</strong></th>
+<th><strong>进入</strong></th>
+<th><strong>唤醒</strong></th>
+<th><strong>对内核电路时钟影响</strong></th>
+<th><strong>对<strong><strong>VDD</strong></strong>区域时钟的影响</strong></th>
+<th><strong>电压调节器</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>睡眠  (立即休眠或退出时休眠)</td>
+<td>WFI    WFE</td>
+<td>任意中断    唤醒事件</td>
+<td>CPU时钟关，对其他时钟或模拟时钟源无影响</td>
+<td>无</td>
+<td>开</td>
+</tr>
+<tr>
+<td>停止</td>
+<td>PDDS和LPDS位+SLEEPDEEP位+WFI或WFE</td>
+<td>任意外部中断（在外部中断寄存器中设置）</td>
+<td>关闭所有内核电路时钟</td>
+<td>HSI和HSE的振荡器关闭</td>
+<td>开启或处于低功耗模式（依据电源控制寄存器PWR_CR的设定）</td>
+</tr>
+<tr>
+<td>待机</td>
+<td>PDDS位+SLEEPDEEP位+WFI或WFE</td>
+<td>WKUP引脚的上升沿、RTC闹钟(唤醒&#x2F;入侵&#x2F;时间戳)事件、NRST引脚上的外部复位、IWDG复位</td>
+<td>关</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th><strong>模式</strong></th>
+<th><strong>主要影响</strong></th>
+<th><strong>唤醒时间</strong></th>
+<th><strong>供应电流</strong><strong>(<strong><strong>典型值</strong></strong>)</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>正常模式</td>
+<td>所有外设正常工作</td>
+<td>0</td>
+<td>51mA</td>
+</tr>
+<tr>
+<td>睡眠模式</td>
+<td>CPU时钟关闭</td>
+<td>1.8us</td>
+<td>29.5mA</td>
+</tr>
+<tr>
+<td>停止模式</td>
+<td>1.8V区域时钟关闭, 电压调节器低功耗</td>
+<td>5.4us</td>
+<td>35uA</td>
+</tr>
+<tr>
+<td>待机模式</td>
+<td>1.8V区域时钟关闭, 电压调节器关闭</td>
+<td>50us</td>
+<td>3.8uA</td>
+</tr>
+</tbody></table>
+<h2 id="DMA"><a href="#DMA" class="headerlink" title="DMA"></a>DMA</h2><p>DMA，全称Direct Memory Access，即直接存储器访问。DMA传输 将数据从一个地址空间复制到另一个地址空间。传输无需CPU直接控制传输，也没有中断处理方式那样保留现场和恢复现场过程，通过硬件为RAM和IO设备开辟一条直接传输数据的通道，使得CPU的效率大大提高</p>
+<p><img src="/img/lazyload.gif" data-original="/2024/08/16/%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/image-20240817101909392.png" alt="image-20240817101909392"></p>
+<p><img src="/img/lazyload.gif" data-original="/2024/08/16/%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/image-20240817102419441.png" alt="image-20240817102419441"></p>
+<p><strong>DMA优先级</strong>：仲裁器管理DMA通道请求分为两个阶段：软件阶段(1)、硬件阶段(2)</p>
+<p>​	第一阶段（软件阶段）：每个通道的优先级可在DMA_CCRx寄存器中设置，有四个等级：最高、高、中和低优先级。</p>
+<p>​	第二阶段（硬件阶段）：如果两个请求有相同软件优先级，较低编号的通道比较高编号的通道有较高的优先级。（大容量芯片中，DMA1控制器拥有高于DMA2控制器的优先级）</p>
+<p><img src="/img/lazyload.gif" data-original="/2024/08/16/%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/image-20240817110743063.png" alt="image-20240817110743063"></p>
+<h2 id="ADC"><a href="#ADC" class="headerlink" title="ADC"></a>ADC</h2><p>ADC，全称：Analog-to-Digital Converter，指模拟&#x2F;数字转换器</p>
+<table>
+<thead>
+<tr>
+<th><strong>ADC****电路类型</strong></th>
+<th><strong>优点</strong></th>
+<th><strong>缺点</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>并联比较型</strong></td>
+<td>转换速度最快</td>
+<td>成本高、功耗高，分辨率低</td>
+</tr>
+<tr>
+<td><strong>逐次逼近型</strong></td>
+<td>结构简单，功耗低</td>
+<td>转换速度较慢</td>
+</tr>
+</tbody></table>
+<p>ADC（模数转换器）能辨别的最小模拟量，通常以其分辨率来表示。分辨率是指ADC能将输入的模拟信号划分为多少个离散的数字值，它由ADC的位数决定。例如，8位、10位、12位或16位等。</p>
+<ul>
+<li><strong>8位ADC</strong>：可以将输入的模拟信号划分为 28&#x3D;2562^8 &#x3D; 25628&#x3D;256 个不同的数字值。</li>
+<li><strong>10位ADC</strong>：可以将输入的模拟信号划分为 210&#x3D;10242^{10} &#x3D; 1024210&#x3D;1024 个不同的数字值。</li>
+<li><strong>12位ADC</strong>：可以将输入的模拟信号划分为 212&#x3D;40962^{12} &#x3D; 4096212&#x3D;4096 个不同的数字值。</li>
+<li><strong>16位ADC</strong>：可以将输入的模拟信号划分为 216&#x3D;655362^{16} &#x3D; 65536216&#x3D;65536 个不同的数字值。</li>
+</ul>
+<p><strong>转换序列</strong></p>
+<p>​	A&#x2F;D转换被组织为两组：规则组（常规转换组）和注入组（注入转换组）</p>
+<p>​	规则组最多可以有16个转换，注入组最多有4个转换</p>
+<p><img src="/img/lazyload.gif" data-original="/2024/08/16/%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/image-20240817112753626.png" alt="image-20240817112753626"></p>
+<p><img src="/img/lazyload.gif" data-original="/2024/08/16/%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/image-20240817113341687.png" alt="image-20240817113341687"></p>
+<p><img src="/img/lazyload.gif" data-original="/2024/08/16/%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/image-20240817115332934.png" alt="image-20240817115332934"></p>
+<h2 id="IIC"><a href="#IIC" class="headerlink" title="IIC"></a>IIC</h2><p><img src="/img/lazyload.gif" data-original="/2024/08/16/%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/image-20240817143550632.png" alt="image-20240817143550632"></p>
+<p><img src="/img/lazyload.gif" data-original="/2024/08/16/%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/image-20240817145415440.png" alt="image-20240817145415440"></p>
+<p><img src="/img/lazyload.gif" data-original="/2024/08/16/%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/image-20240817145431825.png" alt="image-20240817145431825"></p>
+<h2 id="AT24C02"><a href="#AT24C02" class="headerlink" title="AT24C02"></a><strong>AT24C02</strong></h2><p>EEPROM是一种掉电后数据不丢失的储存器，常用来存储一些配置信息，在系统重新上电时就可以加载。</p>
+<p>AT24C02是一个2K bit的EEPROM存储器，使用IIC通信方式。</p>
+<p><img src="/img/lazyload.gif" data-original="/2024/08/16/%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/image-20240817144546970.png" alt="image-20240817144546970"></p>
+<p><img src="/img/lazyload.gif" data-original="/2024/08/16/%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/image-20240817144505964.png" alt="image-20240817144505964"></p>
+<h2 id="SPI"><a href="#SPI" class="headerlink" title="SPI"></a>SPI</h2><p>SPI：串行外设设备接口（Serial Peripheral Interface），是一种高速的，全双工，同步的通信总线</p>
+<p><img src="/img/lazyload.gif" data-original="/2024/08/16/%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/image-20240817152154990.png" alt="image-20240817152154990"></p>
+<p><img src="/img/lazyload.gif" data-original="/2024/08/16/%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/image-20240817152220108.png" alt="image-20240817152220108"></p>
+<p><img src="/img/lazyload.gif" data-original="/2024/08/16/%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/image-20240819095719568.png" alt="image-20240819095719568"></p>
+<p><img src="/img/lazyload.gif" data-original="/2024/08/16/%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/image-20240819090824682.png" alt="image-20240819090824682"></p>
+<h2 id="SPI-FLASH"><a href="#SPI-FLASH" class="headerlink" title="SPI FLASH"></a><strong>SPI FLASH</strong></h2><p>W25Q128是一款容量为16MB的串行FLASH产品，可重复擦写、掉电数据不丢失。内部16MB分为256个块(Block)，每个块大小为64KB；每个块又分为16个扇区(Sector)，每个扇区4KB；每个扇区又分为16个页(Page)，每个页256B。最小擦除单位：1个扇区</p>
+<h2 id="SDIO"><a href="#SDIO" class="headerlink" title="SDIO"></a>SDIO</h2><p><img src="/img/lazyload.gif" data-original="/2024/08/16/%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/image-20240819100907610.png" alt="image-20240819100907610"></p>
+<p><img src="/img/lazyload.gif" data-original="/2024/08/16/%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/image-20240819101115018.png" alt="image-20240819101115018"></p>
+<p><img src="/img/lazyload.gif" data-original="/2024/08/16/%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/image-20240819101233627.png" alt="image-20240819101233627"><img src="/img/lazyload.gif" data-original="/2024/08/16/%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/image-20240819101637324.png" alt="image-20240819101637324"></p>
+<p><img src="/img/lazyload.gif" data-original="/2024/08/16/%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/image-20240819101743896.png" alt="image-20240819101743896"></p>
+<p><img src="/img/lazyload.gif" data-original="/2024/08/16/%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/image-20240819101754392.png" alt="image-20240819101754392"></p>
+<p><img src="/img/lazyload.gif" data-original="/2024/08/16/%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/image-20240819113019199.png" alt="image-20240819113019199"></p>
+<h2 id="FAT文件系统"><a href="#FAT文件系统" class="headerlink" title="FAT文件系统"></a>FAT文件系统</h2><p>FAT文件系统用“簇” 作为数据单元，一个“簇”由一组连续的扇区组成，而一个扇区的大小为512字节。</p>
+<p><img src="/img/lazyload.gif" data-original="/2024/08/16/%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/image-20240820111230403.png" alt="image-20240820111230403"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Areslucky</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2024/08/16/%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/">http://example.com/2024/08/16/知识总结/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">Areslucky</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/stm32/">stm32</a></div><div class="post_share"><div class="social-share" data-image="/./img/blog002.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2024/07/08/Mount_tai/" title="Mount_tai"><img class="cover" src="/img/lazyload.gif" data-original="/img/blog001.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Mount_tai</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/lazyload.gif" data-original="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/lazyload.gif'" alt="avatar"/></div><div class="author-info__name">Areslucky</div><div class="author-info__description">我以我心绘风景，风景迷人因我心。</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">9</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Ares629"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">记忆是一种相会，遗忘是一种自由。</div></div><div class="sticky_layout"></div></div></main><footer id="footer" style="background-image: url('/./img/blog002.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Areslucky</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-nest.min.js"></script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/click-show-text.min.js" data-mobile="false" data-text="lucky,love,endeavor,brave" data-fontsize="15px" data-random="false" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.13.0"></script></div></div>
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body></html>
